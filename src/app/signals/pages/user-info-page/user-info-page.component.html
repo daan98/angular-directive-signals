@@ -1,1 +1,32 @@
-<p>user-info-page works!</p>
+<h1>User Information</h1>
+<hr>
+
+<div class="row">
+    <div class="col4">
+        <h3>Actual user</h3>
+
+        <button
+            class="btn btn-primary"
+            [disabled]="isPrevDisabled()"
+            (click)="getCurrentUserInformation(userId() - 1)"
+        >Previous</button>
+        &nbsp;
+        <button
+            class="btn btn-primary"
+            [disabled]="isNextDisabled()"
+            (click)="getCurrentUserInformation(userId() + 1)"
+        >Next</button>
+    </div>
+    
+    <div class="col-8"  *ngIf="userWasFound()">
+        <h3>User: {{ currentUser()?.id }}</h3>
+        <p>Mail: {{ currentUser()?.email }}</p>
+        <p>Name: {{ fullName() }} </p>
+
+        <img [src]="currentUser()?.avatar" alt="Avatar">
+    </div>
+
+    <div class="col-8 text-danger" *ngIf="!userWasFound()">
+        <h3>User not found...</h3>
+    </div>
+</div>
